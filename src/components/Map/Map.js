@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 
 import ReactMapGL from 'react-map-gl';
+import LoadingIcon from '../UI/LoadingIcon';
+import MapControls from './MapControls';
 import IssMarker from '../ISS/IssMarker';
+import Button from '../UI/Button';
 import classes from './Map.module.css';
 
 const Map = () => {
@@ -26,30 +29,33 @@ const Map = () => {
         keyboard: false
     });
     const [isFollowingIss, setIsFollowingIss] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
+    const [showControls, setShowControls] = useState(false);
     const API_KEY = process.env.REACT_APP_ISS_API_KEY;
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            fetch('https://api.wheretheiss.at/v1/satellites/25544')
-            .then(response => response.json())
-            .then(data => setIssData({
-                latitude: data.latitude,
-                longitude: data.longitude
-            }));
-
-            setViewport({
-                ...viewport,
-                latitude: issData.latitude,
-                longitude: issData.longitude
+        const intervalId = setInterval( async () => {
+            const response = await fetch('https://api.wheretheiss.at/v1/satellites/25544');
+            const issLocation = await response.json();
+            setIssData({
+                latitude: issLocation.latitude,
+                longitude: issLocation.longitude
             });
+            if (isFollowingIss) {
+                setViewport({
+                    ...viewport,
+                    latitude: issLocation.latitude,
+                    longitude: issLocation.longitude
+                });
+            }
+            
+            setIsLoading(false);
         }, 3000);
 
         return () => clearInterval(intervalId);
-    }, [issData, viewport]);
+    }, [issData, viewport, isFollowingIss]);
 
-    const followIssHandler = () => {
-        setIsFollowingIss(!isFollowingIss);
-        console.log(isFollowingIss)
+    useEffect(() => {
         if (isFollowingIss) {
             setSettings({
                 dragPan: false,
@@ -59,7 +65,12 @@ const Map = () => {
                 touchRotate: false,
                 doubleClickZoom: false,
                 keyboard: false
-            });        
+            }); 
+            setViewport({
+                ...viewport,
+                latitude: issData.latitude,
+                longitude: issData.longitude
+            });
         }
 
         if (!isFollowingIss) {
@@ -73,21 +84,48 @@ const Map = () => {
                 keyboard: true
             });        
         }
+    }, [isFollowingIss]);
+
+    const showControlsHandler = () => {
+        setShowControls(!showControls);
+    };
+
+    const followIssHandler = () => {
+        setIsFollowingIss(!isFollowingIss);
     };
 
     return (
         <div className={classes.map}>
-            <button onClick={followIssHandler}>Follow ISS</button>
-            <ReactMapGL
-                mapStyle={'mapbox://styles/markosilvasvuori/ckvjje8ie084v14ou6z0e575x'}
-                onViewportChange={nextViewport => setViewport(nextViewport)}
-                {...viewport}
-                {...settings}
-                // longitude={issData.longitude} latitude={issData.latitude}
-                mapboxApiAccessToken={API_KEY}
-            >
-                <IssMarker longitude={issData.longitude} latitude={issData.latitude} />
-            </ReactMapGL>
+            {isLoading && <LoadingIcon />}
+            {!isLoading && !showControls &&
+                <Button 
+                    className={classes["controls-button"]} 
+                    onClick={showControlsHandler}
+                >
+                    Controls
+                </Button>
+            }
+            {showControls &&
+                <MapControls 
+                    hideControls={showControlsHandler}
+                    onFollow={followIssHandler} 
+                    isFollowing={isFollowingIss} 
+                />
+            }
+            {!isLoading &&
+                <ReactMapGL
+                    mapStyle={'mapbox://styles/markosilvasvuori/ckvjje8ie084v14ou6z0e575x'}
+                    onViewportChange={nextViewport => setViewport(nextViewport)}
+                    mapboxApiAccessToken={API_KEY}
+                    {...viewport}
+                    {...settings}
+                >
+                    <IssMarker 
+                        longitude={issData.longitude} 
+                        latitude={issData.latitude} 
+                    />
+                </ReactMapGL>
+            }
         </div>
     );
 };
