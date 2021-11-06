@@ -1,18 +1,17 @@
-import Button from '../UI/Button';
-
 import classes from './MapControls.module.css';
 
 const MapControls = (props) => {
+    const onClickHandler = () => {
+        props.onClick();
+    };
+
     return (
-        <header className={classes["map-controls"]}>
-            <Button 
-                className={classes.button} 
-                onClick={props.onFollow}
-            >
-                {!props.isFollowing ? 'Follow ISS' : 'Unfollow ISS'}
-            </Button>
-            <Button onClick={props.hideControls}>Close Controls</Button>
-        </header>
+        <div className={classes["map-controls"]}>
+            <label className={classes.checkbox}>
+                <input type="checkbox" defaultChecked onClick={onClickHandler} />
+                <span>Center ISS</span>
+            </label>
+        </div>
     );
 };
 
