@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/iss-tracker/static/css/main.36807277.chunk.css",
-    "main.js": "/iss-tracker/static/js/main.b1679c75.chunk.js",
-    "main.js.map": "/iss-tracker/static/js/main.b1679c75.chunk.js.map",
+    "main.css": "/iss-tracker/static/css/main.e5fad6c2.chunk.css",
+    "main.js": "/iss-tracker/static/js/main.916d7b1e.chunk.js",
+    "main.js.map": "/iss-tracker/static/js/main.916d7b1e.chunk.js.map",
     "runtime-main.js": "/iss-tracker/static/js/runtime-main.502c70ff.js",
     "runtime-main.js.map": "/iss-tracker/static/js/runtime-main.502c70ff.js.map",
-    "static/js/2.7f03dc08.chunk.js": "/iss-tracker/static/js/2.7f03dc08.chunk.js",
-    "static/js/2.7f03dc08.chunk.js.map": "/iss-tracker/static/js/2.7f03dc08.chunk.js.map",
+    "static/js/2.9c0ce911.chunk.js": "/iss-tracker/static/js/2.9c0ce911.chunk.js",
+    "static/js/2.9c0ce911.chunk.js.map": "/iss-tracker/static/js/2.9c0ce911.chunk.js.map",
     "index.html": "/iss-tracker/index.html",
-    "static/css/main.36807277.chunk.css.map": "/iss-tracker/static/css/main.36807277.chunk.css.map",
-    "static/js/2.7f03dc08.chunk.js.LICENSE.txt": "/iss-tracker/static/js/2.7f03dc08.chunk.js.LICENSE.txt"
+    "static/css/main.e5fad6c2.chunk.css.map": "/iss-tracker/static/css/main.e5fad6c2.chunk.css.map",
+    "static/js/2.9c0ce911.chunk.js.LICENSE.txt": "/iss-tracker/static/js/2.9c0ce911.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.502c70ff.js",
-    "static/js/2.7f03dc08.chunk.js",
-    "static/css/main.36807277.chunk.css",
-    "static/js/main.b1679c75.chunk.js"
+    "static/js/2.9c0ce911.chunk.js",
+    "static/css/main.e5fad6c2.chunk.css",
+    "static/js/main.916d7b1e.chunk.js"
   ]
 }
