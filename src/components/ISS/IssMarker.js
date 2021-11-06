@@ -8,11 +8,13 @@ const IssMarker = (props) => {
 
     const markerStyle = {
         position: 'absolute',
-        padding: '10px',
+        padding: '15px',
         borderRadius: '50%',
-        background: 'orange',
+        background: '#e8630a',
+        boxShadow: '0 0 14px 1px rgba(232, 99, 10, .9)',
         color: '#222',
         fontWeight: 'bold',
+        fontSize: '0.875rem',
         left: x,
         top: y
     };
