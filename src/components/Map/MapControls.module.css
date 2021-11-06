@@ -1,23 +1,55 @@
 .map-controls {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 100%;
     height: 50px;
-    background-color: rgba(255, 255, 255, .7);
+    padding: 0 25px;
+    background-color: rgba(4, 7, 13, 0.9);
+    border-right: 1px solid #222;
+    border-bottom: 1px solid #222;
+    border-left: 1px solid #222;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    transform: translate(-50%);
     z-index: 100;
 }
 
-.button {
-    height: 40px;
-    margin-right: 10px;
-    padding: 8px;
-    font-weight: bold;
-    color: #fff;
-    background-color: rgb(27, 75, 75);
+.checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox input {
+    height: 19px;
+    width: 19px;
     border: none;
-    border-radius: 8px;
+    outline: none;
+    background-color: #883d0b;
+    border-radius: 2px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.checkbox input:checked {
+    background-color: #e8630a;
+}
+
+.checkbox input:checked + span::before {
+    content: '\2713';
+    position: absolute;
+    left: 29px;
+    top: 13px;
+    font-size: 1rem;
+}
+
+.checkbox span {
+    color: #fff;
+    cursor: pointer;
+    padding-left: 5px;
+    font-size: 0.875rem;
 }
