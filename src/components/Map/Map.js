@@ -32,7 +32,6 @@ const Map = () => {
     });
     const [isFollowingIss, setIsFollowingIss] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
-    const [showControls, setShowControls] = useState(false);
     const API_KEY = process.env.REACT_APP_ISS_API_KEY;
 
     useEffect(() => {
@@ -79,10 +78,6 @@ const Map = () => {
             });        
         }
     }, [isFollowingIss]);
-
-    const showControlsHandler = () => {
-        setShowControls(!showControls);
-    };
 
     const followIssHandler = (  ) => {
         setIsFollowingIss(!isFollowingIss);
